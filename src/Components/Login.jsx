@@ -8,6 +8,7 @@ import {BsChevronDown} from "react-icons/bs"
 import img1 from "../images/093c-DX36-y.png"
 import img2 from "../images/NtqqucWkedn.png"
 import imgInsta from "../images/ATdtiLb2BQ9.png"
+
 const Login = () => {
   const [image, setImage] = useState(null);
   const imagesArr = [img, imgA, imgB, imgC]
@@ -56,7 +57,7 @@ const Login = () => {
             </div>
           </div>
           <div className='create-account-route-div'>
-            <span>Vous n'avez pas de compte ? <a href="" className='ca-aTag'>Inscrivez Vous</a></span>
+            <span>Vous n'avez pas de compte ? <a href="/signup" className='ca-aTag'>Inscrivez Vous</a></span>
           </div>
           <div className='downloadTheApp-div'>
             <span>Télécharger l'application</span>
