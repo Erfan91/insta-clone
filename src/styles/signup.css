@@ -15,6 +15,7 @@
     flex-direction: column;
     align-items: center;
    padding-top: 20px;
+   margin-bottom: 25px;
 }
 
 .signup-form-header{
@@ -83,4 +84,23 @@
 .signup-instaImg-container{
     width: 80%;
     margin-left: 15px;
+}
+
+.bDate-input-container{
+    display: flex;
+}
+
+.day-dropdown{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 25vh;
+    
+}
+
+.day-dropdown>ul{
+    list-style: none;
+    padding: 0;
+    font-size: 11px;
+    color: grey;
 }
