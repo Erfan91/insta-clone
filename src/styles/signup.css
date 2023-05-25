@@ -87,7 +87,8 @@
 }
 
 .bDate-input-container{
-    display: flex;
+   display: flex;
+   justify-content: space-evenly;
 }
 
 .day-dropdown{
@@ -104,3 +105,68 @@
     font-size: 11px;
     color: grey;
 }
+
+.year-dropdown{
+    display: flex;
+    flex-direction: column;
+    height: 25vh;
+    overflow-y: auto;
+    font-size: 11px;
+    color: grey;
+}
+
+.bd-head-img{
+    background-image: url(../images/quLU_xi5ZD1.png);
+    background-position: 0 0;
+    width: 140px;
+    height: 95px;
+    background-size: 553px 528px;
+}
+
+.signup-bd-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60vh;
+    border: 1px solid black;
+}
+
+.add-bd-span{
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.bd-info-container{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.bd-child-div{
+    margin: 10px;
+}
+
+.selector-div{
+    border: .5px solid grey;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 3px;
+    height: 30px;
+    font-size: small;
+    color: grey;
+}
+
+.bd-month-selector{
+    width: 80px;
+}
+
+.bd-day-selector{
+    width: 40px;
+}
+
+.bd-year-selector{
+    width: 60px;
+}
+

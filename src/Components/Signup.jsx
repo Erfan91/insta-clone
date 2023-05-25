@@ -1,23 +1,53 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiFillFacebook } from "react-icons/ai";
 import { BsChevronDown } from "react-icons/bs"
 const Signup = () => {
   const [display, setDisplay] = useState('none');
   const [displayD, setDisplayD] = useState('none')
   const [dayList, setDayList] = useState([]);
-  // var daylist = []
+  const monthList = ["January", "February", "March", "April", "May", "June", "july", "August", "September", "October", "November", "December"];
+  const [displayM, setDisplayM] = useState('none')
+  const [yearsList, setYearsList] = useState([]);
+  const date = new Date();
+  const day = date.getDay()
+  const month = date.getMonth();
+  const [monthName, setMonthName] = useState('')
+
+  const yearDropdown = () => {
+    const date = new Date()
+    const year = date.getFullYear();
+    var years = [];
+    for (var i = 1919; i <= year; i++) {
+      years.push(i)
+    }
+    if(yearsList.length == 0){
+      setYearsList(yearsList => [...yearsList, years])
+
+    }else{
+      setYearsList([])
+    }
+    console.log(yearsList, "Content", yearsList.length, "Length")
+  }
+  
+  const monthDropdown = () => {
+    if (displayM == "none") {
+      setDisplayM('flex')
+    } else {
+      setDisplayM('none')
+    }
+  }
 
   const dayDropdown = () => {
     var arr = []
     for (var i = 1; i <= 31; i++) {
-      arr.push(i)      
+      arr.push(i)
     }
-    arr.map((day)=>{
-      if(dayList.length == 0){
-        setDayList(dayList=>[...dayList, day])
+    arr.map((day) => {
+      if (dayList.length == 0) {
+        setDayList(dayList => [...dayList, day])
         setDisplayD('flex')
-        
-      }else{
+
+      } else {
         setDayList([])
         setDisplayD('none')
       }
@@ -30,6 +60,7 @@ const Signup = () => {
       setDisplay('none')
     }
   }
+
   return (
     <div className='signup-main-div'>
       <div className="signup-form-main-div" style={{ display: "none" }}>
@@ -59,31 +90,70 @@ const Signup = () => {
       <div className='signup-bd-form'>
         <div className='bd-head-img'>
         </div>
-        <span>Ajoutez votre date de naissannce</span>
+        <span className='add-bd-span'>Ajoutez votre date de naissannce</span>
         <div className='bd-info-container'>
           <span>Elle ne sera pas affichée sur votre profil public.</span>
           <span>Pourquoi dois-je indiquer ma date de naissance ?</span>
         </div>
         <div className="bDate-input-container">
-          <div className='month-input-div'>
-            <input type="text" className='bd-month-input'/>
-          </div>
-          <div className='day-input-div' onClick={dayDropdown}>
-            <input type="day" />
-            <div className="day-dropdown" style={{display:displayD}}>
+          <div className='month-input-div bd-child-div' onClick={monthDropdown}>
+            <div className='bd-month-selector selector-div' >
+              <span>{monthList[month]}</span>
+              <BsChevronDown/>
+            </div>
+            <div className='day-dropdown month-dropdown' style={{ display: displayM }}>
               {
-                dayList.map((day, index)=>{
-                 return(
-                  <ul key={index}>
-                    <li>{day}</li>
-                  </ul>
-                 )
+                monthList.map((month, index) => {
+                  return (
+                    <ul key={index}>
+                      <li>{month}</li>
+                    </ul>
+                  )
                 })
               }
             </div>
           </div>
-          <div className="year-input-div">
-          <input type="date" className='bd-year-input' />
+          <div className='day-input-div bd-child-div' onClick={dayDropdown}>
+            <div className='bd-day-selector selector-div'>
+            <span>{date.getDate()}</span>
+            <BsChevronDown/>
+            </div>
+            <div className="day-dropdown" style={{ display: displayD }}>
+              {
+                dayList.map((day, index) => {
+                  return (
+                    <ul key={index}>
+                      <li>{day}</li>
+                    </ul>
+                  )
+                })
+              }
+            </div>
+          </div>
+          <div className="year-input-div bd-child-div" onClick={yearDropdown}>
+            <div className='bd-year-selector selector-div'>
+            <span>{date.getFullYear()}</span>
+            <BsChevronDown/>
+            </div>
+            <div className="year-dropdown day-dropdown">
+              {
+                yearsList.map((year,index)=>{
+                  return(
+                    <>
+                    {
+                      year.map((yr,indx)=>{
+                        return(
+                          <ul key={indx}>
+                            <li>{yr}</li>
+                          </ul>
+                        )
+                      })
+                    }
+                    </>
+                  )
+                })
+              }
+            </div>
           </div>
         </div>
       </div>
