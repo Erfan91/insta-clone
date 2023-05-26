@@ -96,15 +96,22 @@
     flex-direction: column;
     overflow-y: auto;
     height: 25vh;
-    
+    position: absolute;
+    background-color: white;
+    width: 2.5rem;
+    border: .5px solid grey;
 }
 
-.day-dropdown>ul{
+.date-list{
     list-style: none;
-    padding: 0;
+    padding: 5px;
     font-size: 11px;
     color: grey;
+    display: flex;
+    flex-direction: column;
 }
+
+
 
 .year-dropdown{
     display: flex;
@@ -113,6 +120,12 @@
     overflow-y: auto;
     font-size: 11px;
     color: grey;
+    width: 3.7rem;
+    
+}
+
+.month-dropdown{
+    width: 5rem;
 }
 
 .bd-head-img{
@@ -127,20 +140,34 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 60vh;
-    border: 1px solid black;
+    height: 57vh;
+    border: .5px solid grey;
+    padding: 15px 0;
+    width: 22%;
+
 }
 
 .add-bd-span{
     font-weight: 500;
     font-size: 14px;
+    padding-top: 10px;
 }
 
 .bd-info-container{
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     text-align: center;
+    margin: 10px 0 0;
+    font-size: 14px;
+}
+
+.bd-info-span1{
+    width: 100%;
+}
+
+.bd-info-span2{
+    color: rgb(73, 131, 255);
 }
 
 .bd-child-div{
@@ -168,5 +195,28 @@
 
 .bd-year-selector{
     width: 60px;
+}
+
+.bd-form-bottom-span{
+    font-size: small;
+    color: grey;
+    text-align: center;
+    width: 85%;
+}
+
+.bd-form-btn-container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px 0;
+    height: 40%;
+}
+
+.return-span{
+    color: rgb(73, 131, 255);
+    font-weight: 500;
+    font-size: 15px;
 }
 

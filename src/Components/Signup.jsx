@@ -7,6 +7,7 @@ const Signup = () => {
   const [dayList, setDayList] = useState([]);
   const monthList = ["January", "February", "March", "April", "May", "June", "july", "August", "September", "October", "November", "December"];
   const [displayM, setDisplayM] = useState('none')
+  const [displayY, setDisplayY] = useState('none')
   const [yearsList, setYearsList] = useState([]);
   const date = new Date();
   const day = date.getDay()
@@ -20,15 +21,16 @@ const Signup = () => {
     for (var i = 1919; i <= year; i++) {
       years.push(i)
     }
-    if(yearsList.length == 0){
+    if (yearsList.length == 0) {
       setYearsList(yearsList => [...yearsList, years])
-
-    }else{
+      setDisplayY('flex')
+    } else {
       setYearsList([])
+      setDisplayY('none')
     }
     console.log(yearsList, "Content", yearsList.length, "Length")
   }
-  
+
   const monthDropdown = () => {
     if (displayM == "none") {
       setDisplayM('flex')
@@ -90,24 +92,26 @@ const Signup = () => {
       <div className='signup-bd-form'>
         <div className='bd-head-img'>
         </div>
-        <span className='add-bd-span'>Ajoutez votre date de naissannce</span>
+        <div>
+          <span className='add-bd-span'>Ajoutez votre date de naissannce</span>
+        </div>
         <div className='bd-info-container'>
-          <span>Elle ne sera pas affichée sur votre profil public.</span>
-          <span>Pourquoi dois-je indiquer ma date de naissance ?</span>
+          <span className='bd-info-span1'>Elle ne sera pas affichée sur votre profil public.</span>
+          <span className='bd-info-span2'>Pourquoi dois-je indiquer ma date de <br />naissance ?</span>
         </div>
         <div className="bDate-input-container">
           <div className='month-input-div bd-child-div' onClick={monthDropdown}>
             <div className='bd-month-selector selector-div' >
               <span>{monthList[month]}</span>
-              <BsChevronDown/>
+              <BsChevronDown />
             </div>
             <div className='day-dropdown month-dropdown' style={{ display: displayM }}>
               {
                 monthList.map((month, index) => {
                   return (
-                    <ul key={index}>
-                      <li>{month}</li>
-                    </ul>
+                    // <ul key={index} className='date-list'>
+                      <li className='date-list'>{month}</li>
+                    // </ul>
                   )
                 })
               }
@@ -115,16 +119,16 @@ const Signup = () => {
           </div>
           <div className='day-input-div bd-child-div' onClick={dayDropdown}>
             <div className='bd-day-selector selector-div'>
-            <span>{date.getDate()}</span>
-            <BsChevronDown/>
+              <span>{date.getDate()}</span>
+              <BsChevronDown />
             </div>
             <div className="day-dropdown" style={{ display: displayD }}>
               {
                 dayList.map((day, index) => {
                   return (
-                    <ul key={index}>
-                      <li>{day}</li>
-                    </ul>
+                    // <ul key={index} className='date-list'>
+                      <li className='date-list'>{day}</li>
+                    // </ul>
                   )
                 })
               }
@@ -132,29 +136,37 @@ const Signup = () => {
           </div>
           <div className="year-input-div bd-child-div" onClick={yearDropdown}>
             <div className='bd-year-selector selector-div'>
-            <span>{date.getFullYear()}</span>
-            <BsChevronDown/>
+              <span>{date.getFullYear()}</span>
+              <BsChevronDown />
             </div>
-            <div className="year-dropdown day-dropdown">
+            <div className="year-dropdown day-dropdown" style={{display: displayY}}>
               {
-                yearsList.map((year,index)=>{
-                  return(
+                yearsList.map((year, index) => {
+                  return (
                     <>
-                    {
-                      year.map((yr,indx)=>{
-                        return(
-                          <ul key={indx}>
-                            <li>{yr}</li>
-                          </ul>
-                        )
-                      })
-                    }
+                      {
+                        year.map((yr, indx) => {
+                          return (
+                            // <ul key={indx} className='date-list'>
+                              <li className='date-list'>{yr}</li>
+                            // </ul>
+                          )
+                        })
+                      }
                     </>
                   )
                 })
               }
             </div>
           </div>
+        </div>
+        <span className='bd-form-bottom-span'>Vous devez entrer votre date de naissance</span>
+        <div className='bd-form-btn-container'>
+          <span className="bd-form-bottom-span">
+            Utilisez votre propre date de naissance, même si ce compte est destiné à une entreprise, à un animal de compagnie ou à autre chose
+          </span>
+          <button className='ssru signup-next-btn'>Suivant</button>
+          <span className='return-span'>Retour</span>
         </div>
       </div>
       <footer className='login-footer'>
