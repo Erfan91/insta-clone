@@ -7,13 +7,18 @@ const Signup = () => {
   const [dayList, setDayList] = useState([]);
   const monthList = ["January", "February", "March", "April", "May", "June", "july", "August", "September", "October", "November", "December"];
   const [displayM, setDisplayM] = useState('none')
-  const [displayY, setDisplayY] = useState('none')
+  const [displayY, setDisplayY] = useState('none');
+  const [formDisplay, setFormDisplay] = useState('flex');
+  const [bdFormDispalay, setbdFormDisplay] = useState('none');
   const [yearsList, setYearsList] = useState([]);
   const date = new Date();
   const day = date.getDay()
   const month = date.getMonth();
   const [monthName, setMonthName] = useState('')
-
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const yearDropdown = () => {
     const date = new Date()
     const year = date.getFullYear();
@@ -63,9 +68,59 @@ const Signup = () => {
     }
   }
 
+  const formChanger = () =>{
+    if(formDisplay == 'flex'){
+      setFormDisplay('none')
+      setbdFormDisplay('flex')
+    }else{
+      setFormDisplay('flex')
+      setbdFormDisplay('none')
+    }
+  }
+
+  const nameChanger = e =>{
+    e.preventDefault()
+    setName(e.target.value)
+    console.log(e.target.value)
+  }
+
+  const usernameChanger = e =>{
+    e.preventDefault()
+    setUsername(e.target.value);
+  }
+
+  const emailChanger = e =>{
+    e.preventDefault()
+    setEmail(e.target.value);
+  }
+
+  const passChanger = e =>{
+    e.preventDefault()
+    setPassword(e.target.value);
+  }
+
+  const sender = e =>{
+    e.preventDefault()
+    fetch("http://localhost:3002/user/signup",{
+      method: "POST",
+      headers: new Headers({"content-type":"application/json"}),
+      body: JSON.stringify({
+        firstName: name,
+        username: username,
+        password: password,
+        email: email
+      })
+    }).then(result=>result.json())
+    .then(json=>{
+      console.log(json)
+    })
+  }
+
+
+
   return (
     <div className='signup-main-div'>
-      <div className="signup-form-main-div" style={{ display: "none" }}>
+      <div className="signup-form-main-div" style={{ display: formDisplay}}>
         <div className='signup-form-header'>
           <div className="login-instaImg-container signup-instaImg-container">
           </div>
@@ -78,18 +133,18 @@ const Signup = () => {
           <div className="line"></div>
         </div>
         <div className='input-holder'>
-          <input type="email" className='login-input' placeholder="Numéro de mobile ou e-mail" />
-          <input type="text" className='login-input' placeholder='Nom complet' />
-          <input type="text" className='login-input' placeholder="Nom d'utilisateur" />
-          <input type="password" className='login-input' placeholder='Mot de passe' />
+          <input type="email" className='login-input' placeholder="Numéro de mobile ou e-mail"  onChange={emailChanger}/>
+          <input type="text" className='login-input' placeholder='Nom complet' onChange={nameChanger}/>
+          <input type="text" className='login-input' placeholder="Nom d'utilisateur" onChange={usernameChanger}/>
+          <input type="password" className='login-input' placeholder='Mot de passe' onChange={passChanger}/>
         </div>
         <div className='signup-from-info-container'>
           <p className='signup-form-info-p'>Les personnes qui utilisent notre service ont pu<br /> importer vos coordonnées sur Instagram. <a href='' className='signup-form-aTag'> En<br /> savoir plus</a></p>
           <p className='signup-form-info-p'>En vous inscrivant, vous acceptez nos <a href='' className='signup-form-aTag'>Conditions générales</a>. Découvrez comment nous recueillons, utilisons et partageons vos données en lisant notre <a href='' className='signup-form-aTag'>Politique de confidentialité</a> et comment nous utilisons les cookies et autres technologies similaires en consultant notre <a href='' className='signup-form-aTag'>Politique d’utilisation des cookies</a>.</p>
         </div>
-        <button className='ssru signup-next-btn'>Suivant</button>
+        <button className='ssru signup-next-btn' onClick={sender}>Suivant</button>
       </div>
-      <div className='signup-bd-form'>
+      <div className='signup-bd-form' style={{display:bdFormDispalay}}>
         <div className='bd-head-img'>
         </div>
         <div>
@@ -109,9 +164,7 @@ const Signup = () => {
               {
                 monthList.map((month, index) => {
                   return (
-                    // <ul key={index} className='date-list'>
                       <li className='date-list'>{month}</li>
-                    // </ul>
                   )
                 })
               }
@@ -126,9 +179,7 @@ const Signup = () => {
               {
                 dayList.map((day, index) => {
                   return (
-                    // <ul key={index} className='date-list'>
                       <li className='date-list'>{day}</li>
-                    // </ul>
                   )
                 })
               }
@@ -147,9 +198,7 @@ const Signup = () => {
                       {
                         year.map((yr, indx) => {
                           return (
-                            // <ul key={indx} className='date-list'>
                               <li className='date-list'>{yr}</li>
-                            // </ul>
                           )
                         })
                       }
@@ -166,7 +215,7 @@ const Signup = () => {
             Utilisez votre propre date de naissance, même si ce compte est destiné à une entreprise, à un animal de compagnie ou à autre chose
           </span>
           <button className='ssru signup-next-btn'>Suivant</button>
-          <span className='return-span'>Retour</span>
+          <span className='return-span' onClick={formChanger}>Retour</span>
         </div>
       </div>
       <footer className='login-footer'>

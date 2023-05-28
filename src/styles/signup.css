@@ -98,7 +98,7 @@
     height: 25vh;
     position: absolute;
     background-color: white;
-    width: 2.5rem;
+    width: 2.8rem;
     border: .5px solid grey;
 }
 
@@ -120,12 +120,12 @@
     overflow-y: auto;
     font-size: 11px;
     color: grey;
-    width: 3.7rem;
+    width: 4rem;
     
 }
 
 .month-dropdown{
-    width: 5rem;
+    width: 5.3rem;
 }
 
 .bd-head-img{
@@ -183,6 +183,7 @@
     height: 30px;
     font-size: small;
     color: grey;
+    padding: 0 3px;
 }
 
 .bd-month-selector{
